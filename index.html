@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ออกรางวัลพร้อมระบบซื้อเลข</title>
+  <title>เว็บไซต์ออกรางวัลพร้อมกัน</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
+  <!-- ✅ NAVBAR -->
   <div class="navbar">
     <nav>
       <a href="#">หน้าหลัก</a>
@@ -16,44 +17,28 @@
     </nav>
   </div>
 
+  <!-- ✅ MAIN CONTENT -->
   <div class="container">
-    <h1>🎯 ระบบออกรางวัล + เลือกซื้อเลข</h1>
+    <h1>🎉 ออกรางวัลสุ่มพร้อมกัน 🎉</h1>
 
-    <div class="input-group">
-      <label for="numberInput">กรอกเลขที่ต้องการซื้อ (2, 3, หรือ 4 ตัว):</label><br />
-      <input type="text" id="numberInput" placeholder="เช่น 23, 456 หรือ 7890" maxlength="4">
-      <button onclick="buyNumber()">ซื้อเลข</button>
-      <button onclick="drawResults()">ออกรางวัล</button>
+    <div class="wheel-group">
+      <div>
+        <div id="output2" class="wheel">--</div>
+        <div class="label">รางวัล 2 ตัว</div>
+      </div>
+      <div>
+        <div id="output3" class="wheel">---</div>
+        <div class="label">รางวัล 3 ตัว</div>
+      </div>
+      <div>
+        <div id="output4" class="wheel">----</div>
+        <div class="label">รางวัล 4 ตัว</div>
+      </div>
     </div>
 
-    <div class="history">
-      <h2>📋 รายการเลขที่ซื้อ</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>วันเวลา</th>
-            <th>เลขที่ซื้อ</th>
-          </tr>
-        </thead>
-        <tbody id="buyList"></tbody>
-      </table>
+    <div class="buttons">
+      <button onclick="drawAll()">สุ่มพร้อมกัน</button>
     </div>
-
-    <div id="resultSection"></div>
-  </div>
-
-  <footer style="margin-top:40px;">
-    © 2025 ระบบสุ่มรางวัล | สร้างโดยคุณมงคล
-  </footer>
-
-  <!-- เชื่อม JavaScript ภายนอก -->
-  <script src="script.js"></script>
-
-</body>
-</html>
-<div class="buttons" style="text-align: center; margin-top: 20px;">
-  <button onclick="drawResults()">สุ่มรางวัล</button>
-</div>
 
     <!-- ✅ HISTORY TABLE -->
     <div class="history">
@@ -78,10 +63,5 @@
   </footer>
 
   <script src="script.js"></script>
-</body>
-</html>
-
-
-
 </body>
 </html>
