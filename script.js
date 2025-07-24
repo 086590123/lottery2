@@ -120,3 +120,30 @@ function buyNumber() {
   purchases.push(number);
   input.value = "";
 }
+
+function resetAll() {
+  // ล้างประวัติการออกรางวัล
+  const historyTableBody = document.getElementById("historyTableBody");
+  historyTableBody.innerHTML = "";
+
+  // ล้างรายการซื้อเลข
+  const buyList = document.getElementById("buyList");
+  buyList.innerHTML = "";
+
+  // ล้างผลลัพธ์แสดงรางวัล
+  const resultSection = document.getElementById("resultSection");
+  resultSection.innerHTML = "";
+
+  // ล้างข้อมูลเลขที่ซื้อ (array purchases)
+  if (typeof purchases !== "undefined" && Array.isArray(purchases)) {
+    purchases.length = 0; // ล้าง array
+  }
+
+  // รีเซ็ตตัวเลขบนวงล้อ
+  const output2 = document.getElementById("output2");
+  const output3 = document.getElementById("output3");
+  const output4 = document.getElementById("output4");
+  output2.textContent = "--";
+  output3.textContent = "---";
+  output4.textContent = "----";
+}
