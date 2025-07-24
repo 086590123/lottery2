@@ -1,62 +1,52 @@
-</body>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const purchases = [];
-    const buyList = document.getElementById("buyList");
+const purchases = [];
 
-    function buyNumber() {
-      const input = document.getElementById("numberInput");
-      const number = input.value.trim();
+function buyNumber() {
+  const input = document.getElementById("numberInput");
+  const number = input.value.trim();
+  const buyList = document.getElementById("buyList");
 
-      if (!/^\d{2,4}$/.test(number)) {
-        alert("กรุณากรอกเลข 2 ถึง 4 หลักเท่านั้น");
-        return;
-      }
+  if (!/^\d{2,4}$/.test(number)) {
+    alert("กรุณากรอกเลข 2 ถึง 4 หลักเท่านั้น");
+    return;
+  }
 
-      const now = new Date().toLocaleString("th-TH");
+  const now = new Date().toLocaleString("th-TH");
 
-      const row = document.createElement("tr");
-      row.innerHTML = `<td>${now}</td><td>${number}</td>`;
-      buyList.prepend(row);
+  const row = document.createElement("tr");
+  row.innerHTML = `<td>${now}</td><td>${number}</td>`;
+  buyList.prepend(row);
 
-      purchases.push(number);
-      input.value = "";
-    }
+  purchases.push(number);
+  input.value = "";
+}
 
-    function randomDigits(length) {
-      return Array.from({ length }, () => Math.floor(Math.random() * 10)).join("");
-    }
+function randomDigits(length) {
+  return Array.from({ length }, () => Math.floor(Math.random() * 10)).join('');
+}
 
-    function drawResults() {
-      const resultSection = document.getElementById("resultSection");
+function drawResults() {
+  const resultSection = document.getElementById("resultSection");
 
-      const prize2 = randomDigits(2);
-      const prize3 = randomDigits(3);
-      const prize4 = randomDigits(4);
+  const prize2 = randomDigits(2);
+  const prize3 = randomDigits(3);
+  const prize4 = randomDigits(4);
 
-      const matched = purchases.filter(num => 
-        (num.length === 2 && num === prize2) ||
-        (num.length === 3 && num === prize3) ||
-        (num.length === 4 && num === prize4)
-      );
+  const matched = purchases.filter(num =>
+    (num.length === 2 && num === prize2) ||
+    (num.length === 3 && num === prize3) ||
+    (num.length === 4 && num === prize4)
+  );
 
-      const resultHTML = `
-        <h2>🎉 ผลการออกรางวัล</h2>
-        <p><strong>รางวัล 2 ตัว:</strong> ${prize2}</p>
-        <p><strong>รางวัล 3 ตัว:</strong> ${prize3}</p>
-        <p><strong>รางวัล 4 ตัว:</strong> ${prize4}</p>
-        <p style="margin-top:15px; font-weight: bold; color: ${matched.length > 0 ? 'green' : 'red'};">
-          ${matched.length > 0 
-            ? `คุณถูกรางวัล! เลขที่ถูกรางวัล: ${matched.join(', ')}` 
-            : 'คุณไม่ถูกรางวัล ลองใหม่อีกครั้ง!'}
-        </p>
-      `;
-      resultSection.innerHTML = resultHTML;
-    }
-
-    // attach functions to global scope
-    window.buyNumber = buyNumber;
-    window.drawResults = drawResults;
-  });
-</script>
-</html>
+  const resultHTML = `
+    <h2>🎉 ผลการออกรางวัล</h2>
+    <p><strong>รางวัล 2 ตัว:</strong> ${prize2}</p>
+    <p><strong>รางวัล 3 ตัว:</strong> ${prize3}</p>
+    <p><strong>รางวัล 4 ตัว:</strong> ${prize4}</p>
+    <p style="margin-top:15px; font-weight: bold; color: ${matched.length > 0 ? 'green' : 'red'};">
+      ${matched.length > 0
+        ? `คุณถูกรางวัล! เลขที่ถูกรางวัล: ${matched.join(', ')}`
+        : 'คุณไม่ถูกรางวัล ลองใหม่อีกครั้ง!'}
+    </p>
+  `;
+  resultSection.innerHTML = resultHTML;
+}
