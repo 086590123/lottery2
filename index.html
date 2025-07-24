@@ -36,24 +36,20 @@
       </div>
     </div>
 <div class="buy-number-section" style="margin: 20px 0; text-align: center;">
-  <label for="buyNumberInput">ซื้อเลข (2-4 ตัว): </label>
+  <label for="numberInput">ซื้อเลข (2-4 ตัว): </label>
   <input
     type="text"
-    id="buyNumberInput"
+    id="numberInput"
     placeholder="เช่น 23, 456, 7890"
     maxlength="4"
     style="padding: 5px; font-size: 16px; width: 150px;"
   />
   <button onclick="buyNumber()">ซื้อเลข</button>
-
-  <div style="margin-top: 15px; max-width: 400px; margin-left: auto; margin-right: auto;">
-    <h3>เลขที่ซื้อ</h3>
-    <ul id="boughtNumbersList" style="list-style: none; padding-left: 0; color: #444;"></ul>
-  </div>
 </div>
-    <div class="buttons">
-      <button onclick="drawAll()">สุ่มพร้อมกัน</button>
-    </div>
+
+<div class="buttons" style="text-align: center; margin-top: 20px;">
+  <button onclick="drawResults()">สุ่มรางวัล</button>
+</div>
 
     <!-- ✅ HISTORY TABLE -->
     <div class="history">
