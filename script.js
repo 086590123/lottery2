@@ -1,3 +1,34 @@
+const output2 = document.getElementById("output2");
+const output3 = document.getElementById("output3");
+const output4 = document.getElementById("output4");
+const historyTableBody = document.getElementById("historyTableBody");
+
+function getRandomDigit() {
+  return Math.floor(Math.random() * 10);
+}
+
+function generateNumber(length) {
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    result += getRandomDigit();
+  }
+  return result;
+}
+
+function spinWheel(element, length, callback) {
+  let count = 0;
+  const interval = setInterval(() => {
+    element.textContent = generateNumber(length);
+    count++;
+    if (count > 20) {
+      clearInterval(interval);
+      const finalResult = generateNumber(length);
+      element.textContent = finalResult;
+      callback(finalResult);
+    }
+  }, 100);
+}
+
 function drawAll() {
   let result2, result3, result4;
 
@@ -18,35 +49,27 @@ function drawAll() {
         <td>${result4}</td>
       `;
       historyTableBody.prepend(row);
-
-      // ✅ ตรวจสอบการถูกรางวัล
-      const resultSection = document.getElementById("resultSection");
-      let matched = [];
-
-      for (let num of purchases) {
-        if (
-          (num.length === 2 && num === result2) ||
-          (num.length === 3 && num === result3) ||
-          (num.length === 4 && num === result4)
-        ) {
-          matched.push(num);
-        }
-      }
-
-      // ✅ แสดงผลลัพธ์
-      if (matched.length > 0) {
-        resultSection.innerHTML = `
-          <div style="color: green; font-weight: bold;">
-            🎉 คุณถูกรางวัล! หมายเลขที่ถูกรางวัล: ${matched.join(', ')}
-          </div>
-        `;
-      } else {
-        resultSection.innerHTML = `
-          <div style="color: red; font-weight: bold;">
-            😢 ยังไม่ถูกรางวัล ลองใหม่อีกครั้งนะ!
-          </div>
-        `;
-      }
     }
   }
+}
+
+const purchases = [];
+
+function buyNumber() {
+  const input = document.getElementById("numberInput");
+  const number = input.value.trim();
+  const buyList = document.getElementById("buyList");
+
+  if (!/^\d{2,4}$/.test(number)) {
+    alert("กรุณากรอกเลข 2 ถึง 4 หลักเท่านั้น");
+    return;
+  }
+
+  const now = new Date().toLocaleString("th-TH");
+  const row = document.createElement("tr");
+  row.innerHTML = `<td>${now}</td><td>${number}</td>`;
+  buyList.prepend(row);
+
+  purchases.push(number);
+  input.value = "";
 }
