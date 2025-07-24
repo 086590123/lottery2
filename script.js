@@ -1,7 +1,9 @@
+const purchases = [];
+const buyList = document.getElementById("buyList");
+const resultSection = document.getElementById("resultSection");
+
 function buyNumber() {
   const input = document.getElementById("numberInput");
-  const buyList = document.getElementById("buyList");
-
   const number = input.value.trim();
 
   if (!/^\d{2,4}$/.test(number)) {
@@ -10,6 +12,7 @@ function buyNumber() {
   }
 
   const now = new Date().toLocaleString("th-TH");
+
   const row = document.createElement("tr");
   row.innerHTML = `
     <td>${now}</td>
@@ -17,60 +20,39 @@ function buyNumber() {
   `;
   buyList.prepend(row);
 
+  purchases.push(number);
   input.value = "";
 }
 
-const output2 = document.getElementById("output2");
-const output3 = document.getElementById("output3");
-const output4 = document.getElementById("output4");
-const historyTableBody = document.getElementById("historyTableBody");
-
-function getRandomDigit() {
-  return Math.floor(Math.random() * 10);
-}
-
-function generateNumber(length) {
-  let result = '';
+function randomDigits(length) {
+  let num = "";
   for (let i = 0; i < length; i++) {
-    result += getRandomDigit();
+    num += Math.floor(Math.random() * 10);
   }
-  return result;
+  return num;
 }
 
-function spinWheel(element, length, callback) {
-  let count = 0;
-  const interval = setInterval(() => {
-    element.textContent = generateNumber(length);
-    count++;
-    if (count > 20) {
-      clearInterval(interval);
-      const finalResult = generateNumber(length);
-      element.textContent = finalResult;
-      callback(finalResult);
-    }
-  }, 100);
-}
+function drawResults() {
+  const prize2 = randomDigits(2);
+  const prize3 = randomDigits(3);
+  const prize4 = randomDigits(4);
 
-function drawAll() {
-  let result2, result3, result4;
+  const matched = purchases.filter(num => 
+    (num.length === 2 && num === prize2) ||
+    (num.length === 3 && num === prize3) ||
+    (num.length === 4 && num === prize4)
+  );
 
-  spinWheel(output2, 2, (r) => { result2 = r; checkDone(); });
-  spinWheel(output3, 3, (r) => { result3 = r; checkDone(); });
-  spinWheel(output4, 4, (r) => { result4 = r; checkDone(); });
-
-  let doneCount = 0;
-  function checkDone() {
-    doneCount++;
-    if (doneCount === 3) {
-      const row = document.createElement("tr");
-      const now = new Date().toLocaleString('th-TH');
-      row.innerHTML = `
-        <td>${now}</td>
-        <td>${result2}</td>
-        <td>${result3}</td>
-        <td>${result4}</td>
-      `;
-      historyTableBody.prepend(row);
-    }
-  }
+  const resultHTML = `
+    <h2>🎉 ผลการออกรางวัล</h2>
+    <p><strong>รางวัล 2 ตัว:</strong> ${prize2}</p>
+    <p><strong>รางวัล 3 ตัว:</strong> ${prize3}</p>
+    <p><strong>รางวัล 4 ตัว:</strong> ${prize4}</p>
+    <p style="margin-top:15px; font-weight: bold; color: ${matched.length > 0 ? 'green' : 'red'};">
+      ${matched.length > 0 
+        ? `คุณถูกรางวัล! เลขที่ถูกรางวัล: ${matched.join(', ')}` 
+        : 'คุณไม่ถูกรางวัล ลองใหม่อีกครั้ง!'}
+    </p>
+  `;
+  resultSection.innerHTML = resultHTML;
 }
