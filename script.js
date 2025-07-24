@@ -35,6 +35,53 @@ function drawAll() {
   spinWheel(output2, 2, (r) => { result2 = r; checkDone(); });
   spinWheel(output3, 3, (r) => { result3 = r; checkDone(); });
   spinWheel(output4, 4, (r) => { result4 = r; checkDone(); });
+  // ✨ เพิ่มผลลัพธ์: ถูกรางวัล / ไม่ถูกรางวัล โดยไม่แก้โค้ดเดิม
+(function () {
+  const originalDrawAll = drawAll;
+  drawAll = function () {
+    originalDrawAll();
+    
+    const interval = setInterval(() => {
+      const output2Text = output2.textContent;
+      const output3Text = output3.textContent;
+      const output4Text = output4.textContent;
+
+      if (!/^\d{2}$/.test(output2Text) || !/^\d{3}$/.test(output3Text) || !/^\d{4}$/.test(output4Text)) {
+        return; // ยังไม่ออกผลจริง
+      }
+
+      clearInterval(interval);
+
+      const resultSection = document.getElementById("resultSection");
+      let matched = [];
+
+      for (let num of purchases) {
+        if (
+          (num.length === 2 && num === output2Text) ||
+          (num.length === 3 && num === output3Text) ||
+          (num.length === 4 && num === output4Text)
+        ) {
+          matched.push(num);
+        }
+      }
+
+      if (matched.length > 0) {
+        resultSection.innerHTML = `
+          <div style="color: green; font-weight: bold;">
+            🎉 คุณถูกรางวัล! หมายเลขที่ถูกรางวัล: ${matched.join(', ')}
+          </div>
+        `;
+      } else {
+        resultSection.innerHTML = `
+          <div style="color: red; font-weight: bold;">
+            😢 ยังไม่ถูกรางวัล ลองใหม่อีกครั้งนะ!
+          </div>
+        `;
+      }
+    }, 500);
+  };
+})();
+
 
   let doneCount = 0;
   function checkDone() {
