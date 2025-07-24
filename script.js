@@ -15,8 +15,8 @@ function buyNumber() {
 
   const row = document.createElement("tr");
   row.innerHTML = `
-    <td>${now}</td>
-    <td>${number}</td>
+    <td style="padding: 8px; border: 1px solid #ccc;">${now}</td>
+    <td style="padding: 8px; border: 1px solid #ccc;">${number}</td>
   `;
   buyList.prepend(row);
 
@@ -37,7 +37,7 @@ function drawResults() {
   const prize3 = randomDigits(3);
   const prize4 = randomDigits(4);
 
-  const matched = purchases.filter(num => 
+  const matched = purchases.filter(num =>
     (num.length === 2 && num === prize2) ||
     (num.length === 3 && num === prize3) ||
     (num.length === 4 && num === prize4)
@@ -49,8 +49,8 @@ function drawResults() {
     <p><strong>รางวัล 3 ตัว:</strong> ${prize3}</p>
     <p><strong>รางวัล 4 ตัว:</strong> ${prize4}</p>
     <p style="margin-top:15px; font-weight: bold; color: ${matched.length > 0 ? 'green' : 'red'};">
-      ${matched.length > 0 
-        ? `คุณถูกรางวัล! เลขที่ถูกรางวัล: ${matched.join(', ')}` 
+      ${matched.length > 0
+        ? `คุณถูกรางวัล! เลขที่ถูกรางวัล: ${matched.join(', ')}`
         : 'คุณไม่ถูกรางวัล ลองใหม่อีกครั้ง!'}
     </p>
   `;
