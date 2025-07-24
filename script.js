@@ -33,11 +33,13 @@ function randomDigits(length) {
 }
 
 function drawResults() {
+  const resultSection = document.getElementById("resultSection");
+
   const prize2 = randomDigits(2);
   const prize3 = randomDigits(3);
   const prize4 = randomDigits(4);
 
-  const matched = purchases.filter(num =>
+  const matched = purchases.filter(num => 
     (num.length === 2 && num === prize2) ||
     (num.length === 3 && num === prize3) ||
     (num.length === 4 && num === prize4)
