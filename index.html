@@ -56,6 +56,25 @@
       </table>
     </div>
   </div>
+<div class="buy-section" style="margin-top: 40px;">
+  <h2>🛒 เลือกซื้อเลข</h2>
+  <label for="numberInput">กรอกเลขที่ต้องการซื้อ (2 ถึง 4 หลัก):</label><br>
+  <input type="text" id="numberInput" maxlength="4" placeholder="เช่น 23, 123 หรือ 4567">
+  <button onclick="buyNumber()">ซื้อเลข</button>
+
+  <h3 style="margin-top: 20px;">🧾 รายการเลขที่ซื้อ</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>วันเวลา</th>
+        <th>เลขที่ซื้อ</th>
+      </tr>
+    </thead>
+    <tbody id="buyList"></tbody>
+  </table>
+
+  <div id="resultSection" style="margin-top: 20px;"></div>
+</div>
 
   <!-- ✅ FOOTER -->
   <footer>
