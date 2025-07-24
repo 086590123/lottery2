@@ -20,63 +20,57 @@ function buyNumber() {
   input.value = "";
 }
 
-const buyList = document.getElementById("buyList");
-const resultContainer = document.createElement("div");
-document.querySelector(".container").appendChild(resultContainer);
+const output2 = document.getElementById("output2");
+const output3 = document.getElementById("output3");
+const output4 = document.getElementById("output4");
+const historyTableBody = document.getElementById("historyTableBody");
 
-const purchases = []; // เก็บเลขที่ซื้อ
-
-function buyNumber() {
-  const input = document.getElementById("numberInput");
-  const number = input.value.trim();
-
-  if (!/^\d{2,4}$/.test(number)) {
-    alert("กรุณากรอกเลข 2 ถึง 4 หลักเท่านั้น");
-    return;
-  }
-
-  const now = new Date().toLocaleString("th-TH");
-
-  const row = document.createElement("tr");
-  row.innerHTML = `
-    <td>${now}</td>
-    <td>${number}</td>
-  `;
-  buyList.prepend(row);
-
-  purchases.push(number); // เก็บเลข
-
-  input.value = "";
+function getRandomDigit() {
+  return Math.floor(Math.random() * 10);
 }
 
-function randomDigits(length) {
-  let num = "";
+function generateNumber(length) {
+  let result = '';
   for (let i = 0; i < length; i++) {
-    num += Math.floor(Math.random() * 10);
+    result += getRandomDigit();
   }
-  return num;
+  return result;
 }
 
-function drawResults() {
-  const result2 = randomDigits(2);
-  const result3 = randomDigits(3);
-  const result4 = randomDigits(4);
+function spinWheel(element, length, callback) {
+  let count = 0;
+  const interval = setInterval(() => {
+    element.textContent = generateNumber(length);
+    count++;
+    if (count > 20) {
+      clearInterval(interval);
+      const finalResult = generateNumber(length);
+      element.textContent = finalResult;
+      callback(finalResult);
+    }
+  }, 100);
+}
 
-  const matches = purchases.filter(n =>
-    (n.length === 2 && n === result2) ||
-    (n.length === 3 && n === result3) ||
-    (n.length === 4 && n === result4)
-  );
+function drawAll() {
+  let result2, result3, result4;
 
-  resultContainer.innerHTML = `
-    <div style="margin-top: 30px; text-align: center;">
-      <h2>🎉 ผลการออกรางวัล</h2>
-      <p><strong>รางวัล 2 ตัว:</strong> ${result2}</p>
-      <p><strong>รางวัล 3 ตัว:</strong> ${result3}</p>
-      <p><strong>รางวัล 4 ตัว:</strong> ${result4}</p>
-      <p style="margin-top:15px; font-weight: bold; color: ${matches.length > 0 ? 'green' : 'red'};">
-        ${matches.length > 0 ? `คุณถูกรางวัล: ${matches.join(', ')}` : 'คุณไม่ถูกรางวัล'}
-      </p>
-    </div>
-  `;
+  spinWheel(output2, 2, (r) => { result2 = r; checkDone(); });
+  spinWheel(output3, 3, (r) => { result3 = r; checkDone(); });
+  spinWheel(output4, 4, (r) => { result4 = r; checkDone(); });
+
+  let doneCount = 0;
+  function checkDone() {
+    doneCount++;
+    if (doneCount === 3) {
+      const row = document.createElement("tr");
+      const now = new Date().toLocaleString('th-TH');
+      row.innerHTML = `
+        <td>${now}</td>
+        <td>${result2}</td>
+        <td>${result3}</td>
+        <td>${result4}</td>
+      `;
+      historyTableBody.prepend(row);
+    }
+  }
 }
