@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>เลือกซื้อเลขออกรางวัล</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ออกรางวัลพร้อมระบบซื้อเลข</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Navbar -->
   <div class="navbar">
     <nav>
       <a href="#">หน้าหลัก</a>
@@ -18,15 +17,13 @@
   </div>
 
   <div class="container">
-    <h1>🛒 เลือกซื้อเลขออกรางวัล</h1>
+    <h1>🎯 ระบบออกรางวัล + เลือกซื้อเลข</h1>
 
     <div class="input-group">
-      <div style="margin-top: 20px;">
-  <button onclick="drawResults()">🎰 ออกรางวัล</button>
-</div>
       <label for="numberInput">กรอกเลขที่ต้องการซื้อ (2, 3, หรือ 4 ตัว):</label><br />
-      <input type="text" id="numberInput" placeholder="เช่น 23 หรือ 456" maxlength="4">
-      <button onclick="buyNumber()">ซื้อ</button>
+      <input type="text" id="numberInput" placeholder="เช่น 23, 456 หรือ 7890" maxlength="4">
+      <button onclick="buyNumber()">ซื้อเลข</button>
+      <button onclick="drawResults()">ออกรางวัล</button>
     </div>
 
     <div class="history">
@@ -41,12 +38,17 @@
         <tbody id="buyList"></tbody>
       </table>
     </div>
+
+    <div id="resultSection"></div>
   </div>
 
   <footer>
-    © 2025 เลือกซื้อเลขออนไลน์ | สร้างโดย คุณมงคล
+    © 2025 ระบบสุ่มรางวัล | สร้างโดยคุณมงคล
   </footer>
 
+  <script src="script.js"></script>
+</body>
+</html>
   <script src="script.js"></script>
 </body>
 </html>
