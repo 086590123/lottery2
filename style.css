@@ -1,21 +1,23 @@
-const input = document.getElementById("numberInput");
-const buyList = document.getElementById("buyList");
+window.onload = function () {
+  const input = document.getElementById("numberInput");
+  const buyList = document.getElementById("buyList");
 
-function buyNumber() {
-  const number = input.value.trim();
+  window.buyNumber = function () {
+    const number = input.value.trim();
 
-  if (!/^\d{2,4}$/.test(number)) {
-    alert("กรุณากรอกเลข 2 ถึง 4 หลักเท่านั้น");
-    return;
-  }
+    if (!/^\d{2,4}$/.test(number)) {
+      alert("กรุณากรอกเลข 2 ถึง 4 หลักเท่านั้น");
+      return;
+    }
 
-  const now = new Date().toLocaleString("th-TH");
-  const row = document.createElement("tr");
-  row.innerHTML = `
-    <td>${now}</td>
-    <td>${number}</td>
-  `;
-  buyList.prepend(row);
+    const now = new Date().toLocaleString("th-TH");
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${now}</td>
+      <td>${number}</td>
+    `;
+    buyList.prepend(row);
 
-  input.value = "";
-}
+    input.value = "";
+  };
+};
