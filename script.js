@@ -51,8 +51,8 @@ function drawResults() {
     <p><strong>รางวัล 3 ตัว:</strong> ${prize3}</p>
     <p><strong>รางวัล 4 ตัว:</strong> ${prize4}</p>
     <p style="margin-top:15px; font-weight: bold; color: ${matched.length > 0 ? 'green' : 'red'};">
-      ${matched.length > 0
-        ? `คุณถูกรางวัล! เลขที่ถูกรางวัล: ${matched.join(', ')}`
+      ${matched.length > 0 
+        ? `คุณถูกรางวัล! เลขที่ถูกรางวัล: ${matched.join(', ')}` 
         : 'คุณไม่ถูกรางวัล ลองใหม่อีกครั้ง!'}
     </p>
   `;
