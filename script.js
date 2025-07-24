@@ -53,5 +53,23 @@ function drawAll() {
   }
 }
 
+const purchases = [];
 
-    
+function buyNumber() {
+  const input = document.getElementById("numberInput");
+  const number = input.value.trim();
+  const buyList = document.getElementById("buyList");
+
+  if (!/^\d{2,4}$/.test(number)) {
+    alert("กรุณากรอกเลข 2 ถึง 4 หลักเท่านั้น");
+    return;
+  }
+
+  const now = new Date().toLocaleString("th-TH");
+  const row = document.createElement("tr");
+  row.innerHTML = `<td>${now}</td><td>${number}</td>`;
+  buyList.prepend(row);
+
+  purchases.push(number);
+  input.value = "";
+}
