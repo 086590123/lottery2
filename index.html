@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ออกรางวัลพร้อมระบบซื้อเลข</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>เว็บไซต์ออกรางวัลพร้อมกัน</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body>   ช่วยเพิ่มให้เลือกซื้อเลขให้หน่อย แค่เพิ่มนะไม่ใช่เปลี่ยนทั้งหมด
 
+  <!-- ✅ NAVBAR -->
   <div class="navbar">
     <nav>
       <a href="#">หน้าหลัก</a>
@@ -16,36 +17,71 @@
     </nav>
   </div>
 
+  <!-- ✅ MAIN CONTENT -->
   <div class="container">
-    <h1>🎯 ระบบออกรางวัล + เลือกซื้อเลข</h1>
+    <h1>🎉 สุ่มรางวัล 🎉</h1>
 
-    <div class="input-group">
-      <label for="numberInput">กรอกเลขที่ต้องการซื้อ (2, 3, หรือ 4 ตัว):</label><br />
-      <input type="text" id="numberInput" placeholder="เช่น 23, 456 หรือ 7890" maxlength="4">
-      <button onclick="buyNumber()">ซื้อเลข</button>
-      <button onclick="drawResults()">ออกรางวัล</button>
+    <div class="wheel-group">
+      <div>
+        <div id="output2" class="wheel">--</div>
+        <div class="label">รางวัล 2 ตัว</div>
+      </div>
+      <div>
+        <div id="output3" class="wheel">---</div>
+        <div class="label">รางวัล 3 ตัว</div>
+      </div>
+      <div>
+        <div id="output4" class="wheel">----</div>
+        <div class="label">รางวัล 4 ตัว</div>
+      </div>
+    </div>
+<div class="buy-number-section" style="margin: 20px 0; text-align: center;">
+  <label for="buyNumberInput">ซื้อเลข (2-4 ตัว): </label>
+  <input
+    type="text"
+    id="buyNumberInput"
+    placeholder="เช่น 23, 456, 7890"
+    maxlength="4"
+    style="padding: 5px; font-size: 16px; width: 150px;"
+  />
+  <button onclick="buyNumber()">ซื้อเลข</button>
+
+  <div style="margin-top: 15px; max-width: 400px; margin-left: auto; margin-right: auto;">
+    <h3>เลขที่ซื้อ</h3>
+    <ul id="boughtNumbersList" style="list-style: none; padding-left: 0; color: #444;"></ul>
+  </div>
+</div>
+    <div class="buttons">
+      <button onclick="drawAll()">สุ่มพร้อมกัน</button>
     </div>
 
+    <!-- ✅ HISTORY TABLE -->
     <div class="history">
-      <h2>📋 รายการเลขที่ซื้อ</h2>
+      <h2>📜 ประวัติการออกรางวัล</h2>
       <table>
         <thead>
           <tr>
             <th>วันเวลา</th>
-            <th>เลขที่ซื้อ</th>
+            <th>รางวัล 2 ตัว</th>
+            <th>รางวัล 3 ตัว</th>
+            <th>รางวัล 4 ตัว</th>
           </tr>
         </thead>
-        <tbody id="buyList"></tbody>
+        <tbody id="historyTableBody"></tbody>
       </table>
     </div>
-
-    <div id="resultSection"></div>
   </div>
 
+  <!-- ✅ FOOTER -->
   <footer>
-    © 2025 ระบบสุ่มรางวัล | สร้างโดยคุณมงคล
+    © 2025 เว็บไซต์ออกรางวัล | สร้างโดย คุณมงคล
   </footer>
 
   <script src="script.js"></script>
+</body>
+</html>
+
+
+
 </body>
 </html>
